@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: portaldellago-backend
+    env: python
+    plan: free
+    buildCommand: bash cloud/render/render_build.sh
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://<TU-SITIO-FRONT>.netlify.app
